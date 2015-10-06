@@ -22,12 +22,25 @@ public:
 	Mesh(){ std::cout << "Created a mesh" << std::endl; }
 	void AddFace(Face * face_){ faces.push_back(face_); }
 	
+	void AddVertex(Vertex * v_){
+		
+		bool exist = false;
+		for (Vertex * v : vertices){
+			if (v->id == v->id){
+				return;
+			}
+		}
+
+		if (!exist)
+			vertices.push_back(v_);
+	}
+
 	void CreateFace(Vertex * v1, Vertex * v2, Vertex * v3){
 
 		Face * new_face = new Face();
 
 		// Add the vertices
-		vertices.push_back(v1); vertices.push_back(v2); vertices.push_back(v3);
+		this->AddVertex(v1); this->AddVertex(v2); this->AddVertex(v3);
 
 		Edges[std::pair<int, int>(v1->id, v2->id)] = new HalfEdge();
 		Edges[std::pair<int, int>(v2->id, v3->id)] = new HalfEdge();
