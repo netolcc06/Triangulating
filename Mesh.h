@@ -42,56 +42,56 @@ public:
 		// Add the vertices
 		this->AddVertex(v1); this->AddVertex(v2); this->AddVertex(v3);
 
-		Edges[std::pair<int, int>(v1->id, v2->id)] = new HalfEdge();
-		Edges[std::pair<int, int>(v2->id, v3->id)] = new HalfEdge();
-		Edges[std::pair<int, int>(v3->id, v1->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v1->id, v2->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v2->id, v3->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v3->id, v1->id)] = new HalfEdge();
 
-		Edges[std::pair<int, int>(v1->id, v2->id)]->face = new_face;
-		Edges[std::pair<int, int>(v2->id, v3->id)]->face = new_face;
-		Edges[std::pair<int, int>(v3->id, v1->id)]->face = new_face;
+		edges[std::pair<int, int>(v1->id, v2->id)]->face = new_face;
+		edges[std::pair<int, int>(v2->id, v3->id)]->face = new_face;
+		edges[std::pair<int, int>(v3->id, v1->id)]->face = new_face;
 
-		Edges[std::pair<int, int>(v1->id, v2->id)] = new HalfEdge();
-		Edges[std::pair<int, int>(v2->id, v3->id)] = new HalfEdge();
-		Edges[std::pair<int, int>(v3->id, v1->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v1->id, v2->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v2->id, v3->id)] = new HalfEdge();
+		edges[std::pair<int, int>(v3->id, v1->id)] = new HalfEdge();
 		
 		// It doesn't matter it changes a lot of times. It's only need to access the ooposite half-edge
-		Edges[std::pair<int, int>(v1->id, v2->id)]->next = Edges[std::pair<int, int>(v2->id, v3->id)];
-		Edges[std::pair<int, int>(v2->id, v3->id)]->next = Edges[std::pair<int, int>(v3->id, v1->id)];
-		Edges[std::pair<int, int>(v3->id, v1->id)]->next = Edges[std::pair<int, int>(v1->id, v2->id)];
+		edges[std::pair<int, int>(v1->id, v2->id)]->next = edges[std::pair<int, int>(v2->id, v3->id)];
+		edges[std::pair<int, int>(v2->id, v3->id)]->next = edges[std::pair<int, int>(v3->id, v1->id)];
+		edges[std::pair<int, int>(v3->id, v1->id)]->next = edges[std::pair<int, int>(v1->id, v2->id)];
 
-		Edges[std::pair<int, int>(v1->id, v2->id)]->prev = Edges[std::pair<int, int>(v3->id, v1->id)];
-		Edges[std::pair<int, int>(v2->id, v3->id)]->prev = Edges[std::pair<int, int>(v1->id, v2->id)];
-		Edges[std::pair<int, int>(v3->id, v1->id)]->prev = Edges[std::pair<int, int>(v2->id, v3->id)];
+		edges[std::pair<int, int>(v1->id, v2->id)]->prev = edges[std::pair<int, int>(v3->id, v1->id)];
+		edges[std::pair<int, int>(v2->id, v3->id)]->prev = edges[std::pair<int, int>(v1->id, v2->id)];
+		edges[std::pair<int, int>(v3->id, v1->id)]->prev = edges[std::pair<int, int>(v2->id, v3->id)];
 
-		Edges[std::pair<int, int>(v1->id, v2->id)]->vert = v2;
-		Edges[std::pair<int, int>(v2->id, v3->id)]->vert = v3;
-		Edges[std::pair<int, int>(v3->id, v1->id)]->vert = v1;
+		edges[std::pair<int, int>(v1->id, v2->id)]->vert = v2;
+		edges[std::pair<int, int>(v2->id, v3->id)]->vert = v3;
+		edges[std::pair<int, int>(v3->id, v1->id)]->vert = v1;
 
-		new_face->he = Edges[std::pair<int, int>(v1->id, v2->id)];
+		new_face->he = edges[std::pair<int, int>(v1->id, v2->id)];
 
-		if (Edges.find(std::pair<int, int>(v2->id, v1->id)) != Edges.end())
+		if (edges.find(std::pair<int, int>(v2->id, v1->id)) != edges.end())
 		{
-			Edges[std::pair<int, int>(v2->id, v1->id)]->opposite = Edges[std::pair<int, int>(v1->id, v2->id)];
-			Edges[std::pair<int, int>(v1->id, v2->id)]->opposite = Edges[std::pair<int, int>(v2->id, v1->id)];
+			edges[std::pair<int, int>(v2->id, v1->id)]->opposite = edges[std::pair<int, int>(v1->id, v2->id)];
+			edges[std::pair<int, int>(v1->id, v2->id)]->opposite = edges[std::pair<int, int>(v2->id, v1->id)];
 		}
 
-		if (Edges.find(std::pair<int, int>(v3->id, v2->id)) != Edges.end())
+		if (edges.find(std::pair<int, int>(v3->id, v2->id)) != edges.end())
 		{
-			Edges[std::pair<int, int>(v3->id, v2->id)]->opposite = Edges[std::pair<int, int>(v2->id, v3->id)];
-			Edges[std::pair<int, int>(v2->id, v3->id)]->opposite = Edges[std::pair<int, int>(v3->id, v2->id)];
+			edges[std::pair<int, int>(v3->id, v2->id)]->opposite = edges[std::pair<int, int>(v2->id, v3->id)];
+			edges[std::pair<int, int>(v2->id, v3->id)]->opposite = edges[std::pair<int, int>(v3->id, v2->id)];
 		}
 
-		if (Edges.find(std::pair<int, int>(v1->id, v3->id)) != Edges.end())
+		if (edges.find(std::pair<int, int>(v1->id, v3->id)) != edges.end())
 		{
-			Edges[std::pair<int, int>(v1->id, v3->id)]->opposite = Edges[std::pair<int, int>(v3->id, v1->id)];
-			Edges[std::pair<int, int>(v3->id, v1->id)]->opposite = Edges[std::pair<int, int>(v1->id, v3->id)];
+			edges[std::pair<int, int>(v1->id, v3->id)]->opposite = edges[std::pair<int, int>(v3->id, v1->id)];
+			edges[std::pair<int, int>(v3->id, v1->id)]->opposite = edges[std::pair<int, int>(v1->id, v3->id)];
 		}
 
 		this->faces.push_back(new_face);
 	}
 
 	void PrintFaces(){
-		int bull;
+		
 		for(Face * f : faces){
 			HalfEdge * end = f->he, * tmp;
 			tmp = end;
@@ -105,7 +105,7 @@ public:
 
 	}
 private:
-	std::map< std::pair<int, int>, HalfEdge* > Edges;
+	std::map< std::pair<int, int>, HalfEdge* > edges;
 	std::vector<Face *> faces;
 	std::vector<Vertex *> vertices;
 };
