@@ -26,7 +26,7 @@ public:
 		
 		bool exist = false;
 		for (Vertex * v : vertices){
-			if (v->id == v->id){
+			if (v->id == v_->id){
 				return;
 			}
 		}
