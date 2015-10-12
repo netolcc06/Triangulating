@@ -69,13 +69,15 @@ public:
 				tmp_vert->id = count;
 				mesh->AddVertex(tmp_vert);
 				count++;
-				linestream.clear();
+				
 			}
 			else if (op == "f"){
 				int v0, v1, v2;
 				linestream >> v0 >> v1 >> v2;
 				mesh->CreateFace(mesh->getVertex(v0-1)->id, mesh->getVertex(v1-1)->id, mesh->getVertex(v2-1)->id);
 			}
+
+			linestream.clear();
 		}
 
 		return mesh;
