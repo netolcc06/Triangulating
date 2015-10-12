@@ -15,7 +15,6 @@ public:
 
 	HalfEdge(){ 
 		next = prev = opposite = NULL;
-		std::cout << "Created a HalfEdge" << std::endl; 
 	}
 
 	_Face_ * face;

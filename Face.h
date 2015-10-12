@@ -11,7 +11,7 @@ public:
 
 	typedef typename T::HalfEdge _HalfEdge_;
 
-	Face(){ std::cout << "Created a Face" << std::endl; }
+	Face(){ }
 
 	_HalfEdge_ * he;
 	
